@@ -1,6 +1,14 @@
-FROM openjdk:17-jdk-alpine3.13
+FROM alpine:latest
+USER root
+RUN apk add maven
+RUN apk add openjdk11
+COPY . /patho-app
+WORKDIR patho-app
+RUN mvn -B package --file pom.xml
+ARG JAR_FILE=/patho-app/target/*.jar
+WORKDIR /
+COPY ${JAR_FILE} /app/app.jar
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+WORKDIR /app
 ENTRYPOINT ["java","-jar","/app.jar"]
