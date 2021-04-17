@@ -6,6 +6,4 @@ RUN apk add openjdk11
 COPY . /patho-app
 WORKDIR patho-app
 RUN mvn -B package --file pom.xml
-COPY target/*.jar /app.jar
-WORKDIR /
-ENTRYPOINT ["java","-jar","/app.jar"]
+
