@@ -8,6 +8,6 @@ COPY . /patho-app
 WORKDIR patho-app
 RUN mvn -B package --file pom.xml
 WORKDIR /
-COPY /patho-app/target/*.jar /app/app.jar
+COPY /patho-app/target/*.jar /app/
 WORKDIR /app
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/*.jar"]
